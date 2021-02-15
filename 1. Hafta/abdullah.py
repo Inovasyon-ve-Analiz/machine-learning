@@ -18,7 +18,7 @@ regr = linear_model.LinearRegression()
 regr.fit(dataX[:41], dataY)
 dataY_pred = regr.predict(dataX)
 
-print("The number of confirmed cases are %d after 75 days." %dataY_pred[-1])
+print("The confirmed cases are %d after 75 days." %dataY_pred[-1])
 plt.scatter(dataX[:41], dataY,  color='black')
 plt.plot(dataX, dataY_pred, color='blue', linewidth=3)
 plt.xticks(())
