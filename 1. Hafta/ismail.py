@@ -19,4 +19,5 @@ print("75. gun vaka sayisi: "+str(y_predict[len(y_predict)-1]))
 plt.scatter(x_train,y_train)
 plt.plot(x_predict,y_predict)
 plt.plot(x_train,y_train_predict)
-plt.show();
+plt.show()
+print("I am Furkan")
