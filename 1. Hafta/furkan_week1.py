@@ -9,7 +9,7 @@ y = np.array(db["Confirmed"]).reshape(-1, 1)
 
 model = linear_model.LinearRegression()
 model.fit(x, y)
-prediction = int(model.predict(np.array([70]).reshape(1, -1)).ravel())
+prediction = int(model.predict(np.array([75]).reshape(1, -1)).ravel())
 print("The predicted number of covid-19 case at Day 75:",prediction)
 
 h = model.predict(x)
