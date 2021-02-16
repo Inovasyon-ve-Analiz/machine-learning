@@ -1,11 +1,12 @@
 # Machine-Learning
 ## 1. HAFTA
-**Görev Kodu :** Python Sklearn Kütüphanesini kullanarak covid_19_data_tr.csv dosyası içerisindeki #Confirmed sayılarını gün ile lineer regression ediniz. 75 gün sonraki Confirmed Cases sayısını tespit ediniz.
+### Görev Kodu : 
+Python Sklearn Kütüphanesini kullanarak covid_19_data_tr.csv dosyası içerisindeki #Confirmed sayılarını gün ile lineer regression ediniz. 75 gün sonraki Confirmed Cases sayısını tespit ediniz.
 
 ## 2. HAFTA
-**Görev Kodu 1 :** 
+### Görev Kodu 1 :
 Python Sklearn Kütüphanesini kullanarak covid_19_data_tr.csv dosyası içerisindeki #Confirmed sayılarını gün ile polynomial regression ediniz. Hangi polinim fonksiyonu kullanacağınızı Sağlıkçıların öngörülerine göre (peak,plato mevuzu) belirleyiniz. 75 gün sonraki Confirmed Cases sayısını tespit ediniz.
-**Görev Kodu 2 :** 
+### Görev Kodu 2 :
 Python Sklearn Kütüphanesini kullanarak car_fuel_consumption.csv dosyası içerisindeki distance, speed, temp_outside inputlarını consume outputu ile multiple regression yapınız. Sadece E10 gas_type olan araçlar ile yapınız, diğerlerni droplayınız. Sonuçta, distance,speed, temp_outside inputları verilince consume outpunu verecek bir fonksiyon, model oluşturunuz.
 
 ## 3. HAFTA
