@@ -21,7 +21,7 @@ Python Sklearn kütüphanesini kullanarak 3. HAFTADA yaptığınız görev kodun
 NOT : Neural network yapısında layer sayısına bağlı olarak data sayısı ve özelliklerinin logistic regressiona göre daha önemli olduğuna dikkat ediniz.
 
 ## 6. HAFTA
-### Görev Kodu :
+### Görev Kodu : 
 5. Haftada gerçekleştirilen training ve test işlemlerinin iteration sayısına bağlı Cost değeri grafiklerini çıkarınız. Bu grafiklerin underfit,overfit durumlarını değerlendiriniz.
 
 ## 8. HAFTA
