@@ -22,7 +22,7 @@ NOT : Neural network yapısında layer sayısına bağlı olarak data sayısı v
 
 ## 6. HAFTA
 ### Görev Kodu : 
-5. haftada gerçekleştirilen training ve test işlemlerinin iteration sayısına bağlı Cost değeri grafiklerini çıkarınız. Bu grafiklerin underfit,overfit durumlarını değerlendiriniz.
+Beşinci haftada gerçekleştirilen training ve test işlemlerinin iteration sayısına bağlı Cost değeri grafiklerini çıkarınız. Bu grafiklerin underfit,overfit durumlarını değerlendiriniz.
 
 ## 8. HAFTA
 ### Görev Kodu :
