@@ -4,6 +4,8 @@ from matplotlib import pyplot as plt
 import cv2
 import glob
 from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+
 
 a = 100
 drones = np.ndarray((1,a**2))
@@ -26,9 +28,12 @@ antis = antis[1:]
 
 x = np.vstack((drones,antis))
 y = np.vstack((np.ones((len(drones),1)),np.zeros((len(antis),1))))
+x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.75,shuffle=True)
 
 model = LogisticRegression(max_iter=5000)
-model.fit(x,np.ravel(y))
+model.fit(x_train,np.ravel(y_train))
+prediction = model.predict(x_test)
 
-prediction = model.predict(cv2.resize(cv2.imread("path/to/x_test_image.jpg",0),(a,a)).reshape(1,a**2))
-print(prediction)   #predicts inversely
+print("Prediction:  "+ str(prediction))
+print("Y_test:      "+ str(y_test.T[0]))
+print("Accuracy: "+str(model.score(x_test,y_test)))
