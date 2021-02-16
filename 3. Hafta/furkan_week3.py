@@ -6,7 +6,6 @@ import glob
 from sklearn.linear_model import LogisticRegression
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
-import random
 
 a = 100
 drones = np.ndarray((1,a**2))
