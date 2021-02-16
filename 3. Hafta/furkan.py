@@ -4,6 +4,8 @@ from matplotlib import pyplot as plt
 import cv2
 import glob
 from sklearn.linear_model import LogisticRegression
+from sklearn import preprocessing
+import random
 
 a = 100
 drones = np.ndarray((1,a**2))
@@ -20,13 +22,23 @@ antis = antis[1:]
 
 x = np.vstack((drones,antis))
 y = np.vstack((np.ones((len(drones),1)),np.zeros((len(antis),1))))
-train_x = np.vstack((x[1:26], x[40:]))
-train_y = np.vstack((np.ones(25,1), np.zeros(25)))
-test_x = x[26:40]
-test_y = train_y = np.vstack((np.ones(8,1), np.zeros(6)))
+dataset = np.hstack((x, y))
+np.random.shuffle(dataset)
+x = dataset[:, :-1]; y = dataset[:, -1]
+
+number_of_test_examples = 20
+n = int((64 - number_of_test_examples) / 2)
+train_x = np.vstack((x[:n], x[len(x) - n:]))
+train_y = np.vstack((np.ones((n,1)),np.zeros((n,1))))
+test_x = x[n:len(x) - n]
+test_y = np.vstack((np.ones((len(drones) - n, 1)),np.zeros((len(antis) - n, 1))))
+
+scaler = preprocessing.StandardScaler().fit(train_x)
+train_x = scaler.transform(train_x)
 
 model = LogisticRegression(max_iter=5000)
 model.fit(train_x,np.ravel(train_y))
 
 prediction = model.predict(test_x)
-print(prediction)   #predicts inversely
+accuracy = sum(np.transpose([prediction]) == test_y)
+print(accuracy, "out of", np.shape(prediction), "examples are predicted correctly")
