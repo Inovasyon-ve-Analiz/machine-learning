@@ -5,6 +5,7 @@ import cv2
 import glob
 from sklearn.linear_model import LogisticRegression
 from sklearn import preprocessing
+from sklearn.model_selection import train_test_split
 import random
 
 a = 100
@@ -22,16 +23,19 @@ antis = antis[1:]
 
 x = np.vstack((drones,antis))
 y = np.vstack((np.ones((len(drones),1)),np.zeros((len(antis),1))))
+
+train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.10, random_state=42)
+
+""" train_test_split function
 dataset = np.hstack((x, y))
 np.random.shuffle(dataset)
 x = dataset[:, :-1]; y = dataset[:, -1]
-
 number_of_test_examples = 20
 n = int((64 - number_of_test_examples) / 2)
 train_x = np.vstack((x[:n], x[len(x) - n:]))
 train_y = np.vstack((np.ones((n,1)),np.zeros((n,1))))
 test_x = x[n:len(x) - n]
-test_y = np.vstack((np.ones((len(drones) - n, 1)),np.zeros((len(antis) - n, 1))))
+test_y = np.vstack((np.ones((len(drones) - n, 1)),np.zeros((len(antis) - n, 1))))"""
 
 scaler = preprocessing.StandardScaler().fit(train_x)
 train_x = scaler.transform(train_x)
