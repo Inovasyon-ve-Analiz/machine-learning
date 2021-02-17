@@ -19,5 +19,5 @@ model.fit(train_x, train_y)
 
 prediction = model.predict(test_x)
 
-accuracy = 100 * (1 - abs(1/(len(test_y)) * sum((prediction - test_y) / test_y)))
+accuracy = 100 * (1 - 1/(len(test_y)) * sum(abs(prediction - test_y) / test_y))
 print("Model Accuracy:", accuracy[0].round(2), "percent")
