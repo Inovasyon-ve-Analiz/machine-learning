@@ -23,7 +23,7 @@ antis = antis[1:]
 x = np.vstack((drones,antis))
 y = np.vstack((np.ones((len(drones),1)),np.zeros((len(antis),1))))
 
-train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.10, random_state=42)
+train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.10)
 
 """ train_test_split function
 dataset = np.hstack((x, y))
