@@ -5,7 +5,6 @@ from sklearn import linear_model
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import Ridge
-from sklearn import preprocessing
 
 
 db = pd.read_csv("covid_19_data_tr.csv")
@@ -35,7 +34,3 @@ plt.plot(x, y, 'r-')
 plt.title("Polynomial regression with degree " + str(degree))
 plt.show()
 
-
-arr = np.array([[1, 2], [3, 4]])
-arr_x = arr[:, 0]
-print(arr_x)

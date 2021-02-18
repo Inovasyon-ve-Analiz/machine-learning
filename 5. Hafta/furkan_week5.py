@@ -26,12 +26,14 @@ y = np.vstack((np.ones((len(drones),1)),np.zeros((len(antis),1)))).ravel()
 train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.30, random_state=42)
 scaler = preprocessing.StandardScaler().fit(train_x)
 train_x = scaler.transform(train_x)
+scaler = preprocessing.StandardScaler().fit(test_x)
+test_x = scaler.transform(test_x)
 
 scores = []
-for i in range(1,7):
+for i in range(1,10):
     model = MLPClassifier(hidden_layer_sizes=i, random_state=1, max_iter=300)
     model.fit(train_x, train_y)
     scores.append((model.score(test_x, test_y)*100).round(2))
 
-for j in range(1,7):
+for j in range(1,10):
     print(f"For {j} hidden layer, we get", scores[j - 1], "percent accuracy")
