@@ -23,7 +23,7 @@ antis = antis[1:]
 x = np.vstack((drones,antis))
 y = np.vstack((np.ones((len(drones),1)),np.zeros((len(antis),1))))
 
-train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.10)
+train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.30, random_state=42)
 
 """ train_test_split function
 dataset = np.hstack((x, y))
@@ -42,6 +42,14 @@ train_x = scaler.transform(train_x)
 model = LogisticRegression(max_iter=5000)
 model.fit(train_x,np.ravel(train_y))
 
+print((model.score(test_x, test_y)*100).round(2), "percent accuracy")
+
+"""  
+# Long Version: Look up for the short version(model.score())
 prediction = model.predict(test_x)
 accuracy = sum(np.transpose([prediction]) == test_y)
-print(accuracy, "out of", np.shape(prediction), "examples are predicted correctly")
+print(accuracy[0], "out of", np.shape(prediction)[0], "examples are predicted correctly")
+"""
+
+
+
