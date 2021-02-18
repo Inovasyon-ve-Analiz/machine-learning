@@ -30,7 +30,6 @@ print("The predicted number of covid-19 case at 75th day:",prediction)
 X = np.arange(75).reshape(-1, 1)
 y_predict = model.predict(X)
 
-plt.figure()
 plt.plot(np.arange(75), y_predict ,'b.')
 plt.plot(x, y, 'r-')
 plt.title("Polynomial regression with degree " + str(degree))
