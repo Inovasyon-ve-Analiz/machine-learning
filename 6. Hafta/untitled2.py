@@ -29,16 +29,18 @@ train_x = scaler.transform(train_x)
 scaler = preprocessing.StandardScaler().fit(test_x)
 test_x = scaler.transform(test_x)
 
-def cost(x, y, model):
-    predict = model.predict(x).reshape(-1,1)
-    sum = 0
-    for i in range(len(y)):
-        sum += (predict[i] - y[i])**2
+def cost_function(x, y, model):
+    m = x.shape[0]
+    predict = model.predict(x)
+    total_cost = -(1 / m) * np.sum(y*np.log() + (1 - y) * np.log(
+    1 - hypothesis(theta, x)))
+    return total_cost
     
     
 for i in range(10,200,10):
     model = MLPClassifier(hidden_layer_sizes=2, max_iter=i)
     model.fit(train_x, train_y)
+    print(model.get_params())
     cost_train = 1/(2*len(train_y)) * sum(list(map(lambda x:x**2, model.predict(train_x) - train_y)), 0)
     cost_test = 1/(2*len(test_y)) * sum(list(map(lambda x:x**2, model.predict(test_x) - test_y)), 0)
     print(cost_train)
