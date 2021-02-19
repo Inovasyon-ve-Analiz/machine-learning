@@ -23,7 +23,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 
-control = int(input("Her zaman fit edilsin mi? EVET icin 1, HYR icin 0 :\n"))
+control = 1
 
 a = 100
 drones = np.ndarray((1,a**2))
@@ -52,7 +52,7 @@ scaler.fit(dataX)
 dataX = scaler.transform(dataX)
 
 X_train, X_test, y_train, y_test = train_test_split(dataX, dataY, 
-                                                    test_size=0.1,random_state=3)
+                                                    test_size=0.2,random_state=3)
 xxt = X_test
 yyt = y_test
 
@@ -70,7 +70,15 @@ for i in test_sizes:
     yt = y_train[:round(size*i),:]
     if control:
         mlp.fit(xt, yt.ravel())
-    
+        
+    predictionsTest = mlp.predict(xxt)
+    predictionsTrain = mlp.predict(xt)
+   
+    print("\nPredictionTrain:\n",str(predictionsTrain))
+    print("PredictionTest:",str(predictionsTest))
+    print("Y_test:        ",str(y_test.T[0]))
+    print("Accuracy:",str(mlp.score(xxt,yyt))+"\n")
+    print("-"*50)
     lst.append(1-mlp.score(xt,yt))
     lst2.append(1-mlp.score(xxt,yyt))
     
