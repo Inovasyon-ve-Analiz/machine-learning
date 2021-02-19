@@ -40,7 +40,7 @@ train_sizes, train_scores, validation_scores = learning_curve(model, x, y, cv=KF
 train_scores_mean = train_scores.mean(axis = 1)
 validation_scores_mean = validation_scores.mean(axis = 1)
 
-figure, axes = plt.subplots(2, figsize=(8,12))
+figure, axes = plt.subplots(2, figsize=(10,15))
 axes[0].plot(train_sizes, 1 - train_scores_mean, label = 'Training Error')
 axes[0].plot(train_sizes, 1 - validation_scores_mean, label = 'Validation Error')
 axes[1].plot(np.arange(1, len(x)), model.loss_curve_, label="Training Error")
