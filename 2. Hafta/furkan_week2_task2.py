@@ -52,7 +52,7 @@ def learningCurve(x, y):
     
     train_sizes = np.linspace(0.1, 1, 5)
     cv = ShuffleSplit(n_splits=10, test_size=0.2, random_state=0)
-    train_sizes, train_scores, validation_scores = learning_curve(model, x, y, cv=cv, n_jobs=4, train_sizes=train_sizes)
+    train_sizes, train_scores, validation_scores = learning_curve(model, x, y, cv=cv, n_jobs=-1, train_sizes=train_sizes)
     train_scores_mean = train_scores.mean(axis = 1)
     validation_scores_mean = validation_scores.mean(axis = 1)
     
