@@ -60,7 +60,7 @@ X_train, X_test, y_train, y_test = train_test_split(dataX, dataY,
 xxt = X_test
 yyt = y_test
 
-mlp = MLPClassifier(hidden_layer_sizes=(5,5), max_iter=2000)
+mlp = MLPClassifier(hidden_layer_sizes=(10), max_iter=2000)
 
 if not control:
     mlp.fit(X_train, y_train.ravel())
