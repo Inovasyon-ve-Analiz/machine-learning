@@ -21,4 +21,6 @@ ddof=1 provides an unbiased estimator of the variance of the infinite population
 ddof=0 provides a maximum likelihood estimate of the variance for normally distributed variables. 
 The standard deviation computed in this function is the square root of the estimated variance, 
 so even with ddof=1, it will not be an unbiased estimate of the standard deviation per se.
+
+Reference: https://numpy.org/doc/stable/reference/generated/numpy.std.html
 """
