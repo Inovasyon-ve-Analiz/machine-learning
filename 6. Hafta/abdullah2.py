@@ -47,10 +47,6 @@ antis = antis[1:]
 dataX = np.vstack((antis,drones))
 dataY = np.vstack((np.zeros((31,1)),np.ones((33,1))))
 
-test_sizes = np.linspace(0.1,0.99,20)
-lst=[]
-lst2=[]
-
 scaler = StandardScaler()
 scaler.fit(dataX)
 dataX = scaler.transform(dataX)
@@ -60,13 +56,15 @@ X_train, X_test, y_train, y_test = train_test_split(dataX, dataY,
 xxt = X_test
 yyt = y_test
 
-mlp = MLPClassifier(hidden_layer_sizes=(10), max_iter=2000)
+mlp = MLPClassifier(hidden_layer_sizes=(10), max_iter=2000,random_state=5654)
 
 if not control:
     mlp.fit(X_train, y_train.ravel())
 
 size=X_train.shape[0]
-
+test_sizes = np.linspace(0.1,0.99,20)
+lst=[]
+lst2=[]
 for i in test_sizes:
     xt = X_train[:round(size*i),:]
     yt = y_train[:round(size*i),:]
@@ -76,7 +74,7 @@ for i in test_sizes:
     lst.append(1-mlp.score(xt,yt))
     lst2.append(1-mlp.score(xxt,yyt))
     
-a=test_sizes*64
+a=test_sizes*size
 
 fig, axes = plt.subplots(figsize=(15, 10))
 axes.set_title("Learning Curve")
@@ -84,5 +82,5 @@ axes.grid()
 axes.plot(a,lst2, 'o-', color="g",label="Test error")
 axes.plot(a,lst, 'o-', color="r",label="Training error")
 axes.legend(loc="best")
-
 plt.show()
+
