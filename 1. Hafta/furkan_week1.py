@@ -3,6 +3,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 from sklearn import linear_model
 
+
 db = pd.read_csv("covid_19_data_tr.csv")
 x = np.arange(1,42).reshape(-1, 1)
 y = np.array(db["Confirmed"]).reshape(-1, 1)
@@ -16,4 +17,5 @@ h = model.predict(x)
 plt.plot(x, y)
 plt.plot(x, h)
 plt.show()
-print("fg")
+
+

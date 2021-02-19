@@ -4,7 +4,6 @@ from matplotlib import pyplot as plt
 from sklearn import linear_model
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import make_pipeline
-from sklearn.linear_model import Ridge
 
 
 db = pd.read_csv("covid_19_data_tr.csv")
