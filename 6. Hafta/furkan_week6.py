@@ -6,6 +6,9 @@ import glob
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
+from sklearn.model_selection import learning_curve
+from sklearn.model_selection import ShuffleSplit
+
 
 a = 100
 drones = np.ndarray((1,a**2))
@@ -29,19 +32,18 @@ train_x = scaler.transform(train_x)
 scaler = preprocessing.StandardScaler().fit(test_x)
 test_x = scaler.transform(test_x)
 
-def cost(x, y, model):
-    predict = model.predict(x).reshape(-1,1)
-    sum = 0
-    for i in range(len(y)):
-        sum += (predict[i] - y[i])**2
-    
-    
-for i in range(10,200,10):
-    model = MLPClassifier(hidden_layer_sizes=2, max_iter=i)
-    model.fit(train_x, train_y)
-    cost_train = 1/(2*len(train_y)) * sum(list(map(lambda x:x**2, model.predict(train_x) - train_y)), 0)
-    cost_test = 1/(2*len(test_y)) * sum(list(map(lambda x:x**2, model.predict(test_x) - test_y)), 0)
-    print(cost_train)
-    
-    
-    
+model = MLPClassifier(hidden_layer_sizes=2, max_iter=200)
+model.fit(train_x, train_y)
+cv = ShuffleSplit(n_splits=100, test_size=0.2, random_state=0)
+print(cv)
+train_sizes = np.linspace(0.1, 1, 10)
+train_sizes, train_scores, validation_scores = learning_curve(MLPClassifier(), x, y, cv=cv, n_jobs=12,  train_sizes=train_sizes)
+print(train_sizes)
+train_scores_mean = train_scores.mean(axis = 1)
+validation_scores_mean = validation_scores.mean(axis = 1)
+
+plt.plot(train_sizes, 1 - train_scores_mean, label = 'Training error')
+plt.plot(train_sizes, 1 - validation_scores_mean, label = 'Validation error')
+plt.legend()
+#plt.ylim(0,1)
+plt.show()
