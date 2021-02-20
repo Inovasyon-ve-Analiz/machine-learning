@@ -5,7 +5,11 @@ Created on Sat Feb 20 08:44:02 2021
 @author: yerminal
 @website: https://github.com/yerminal
 """
-
+"""
+For those who don't want to work on this,
+Tutorial Link: https://medium.com/@ahmetxgenc/how-to-use-tesseract-on-windows-fe9d2a9ba5c6
+Tesseract Download Link: https://digi.bib.uni-mannheim.de/tesseract/
+"""
 import pytesseract
 from PIL import Image
 import cv2
