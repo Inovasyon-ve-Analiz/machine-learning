@@ -20,5 +20,5 @@ retval, threshold = cv2.threshold(image,127,255,cv2.THRESH_BINARY)
 
 text = pytesseract.image_to_string(threshold)
 
-with open("output.txt", "w",5 ,"utf-8") as text_file: 
+with open("output.txt", "w", 5 ,"utf-8") as text_file: 
     text_file.write(text)
