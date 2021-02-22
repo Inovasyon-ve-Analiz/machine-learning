@@ -143,7 +143,7 @@ title = "Learning Curve"
 # score curves, each time with 20% data randomly selected as a validation set.
 cv = ShuffleSplit(n_splits=20, test_size=0.2, random_state=3)
 
-estimator = MLPClassifier(hidden_layer_sizes=(10), max_iter=1000)
+estimator = MLPClassifier(hidden_layer_sizes=(5,5), max_iter=2000,random_state=5654)
 plot_learning_curve(estimator, title, dataX, dataY.ravel(), axes, ylim=(0, 1.1),
                     cv=cv, n_jobs=4, train_sizes=np.linspace(.1, 1.0, 5))
 

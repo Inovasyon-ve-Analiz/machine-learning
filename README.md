@@ -35,8 +35,6 @@ Her bir kümede hangi yaralıların olduğunu (konumlarını) belirtiniz, bir ş
 Random kütüphanesi gaussian distrubtion kullanarak 100 sayı üretin. Bu sayıların ortalamalarını, varyanslarını manuel olarak hesaplayacak bir kod geliştirin ve gaussian distribution fonksiyonuna parametre olarak girdiğiniz ortalama ve varyans değerleriyle karşılaştırın.
 
 ## 11. HAFTA
-### Görev Kodu 1 :
+### Görev Kodu :
 OCR algoritmasını Cam-Scanner’dan veya internetten bulup bilgisayarınıza kurarak deneyin. İyi çalışıp çalışmadığını buraya, foruma yazın.
-### Görev Kodu 2 (Optional) :
-İsterseniz kendiniz bir OCR algoritması geliştirmeye çalışın. Bu konu hakkında benimle iletişime geçin, yapılabilir mi yapılamaz mı bir konuşalım
 
