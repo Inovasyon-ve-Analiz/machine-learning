@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from torch.nn.modules.activation import PReLU
+import time
 
 class Net(nn.Module):
     def __init__(self):
@@ -58,7 +59,9 @@ def get_data(path):
 
     return X_train, X_test, Y_train, Y_test
 
+tic = time.time()
 path = "weatherAUS.csv"
+run_on_gpu = True
 
 X_train, X_test, Y_train, Y_test = get_data(path)
 
@@ -68,6 +71,12 @@ Y_train = torch.from_numpy(Y_train).float()
 Y_test = torch.from_numpy(Y_test).float()
 
 net = Net()
+if run_on_gpu:
+    X_train = X_train.cuda()
+    Y_train = Y_train.cuda()
+    X_test = X_test.cuda()
+    Y_test = Y_test.cuda()
+    net = net.cuda()
 
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(net.parameters(), lr=0.001)
@@ -90,8 +99,8 @@ pred = net(X_test)
 pred.size = Y_test.size
 loss = loss_fn(pred, Y_test)
 print("mean error in test set: " +str(loss.item()))
-
-print("done")
+toc = time.time()
+print("done in seconds: "+str(toc-tic))
 
 """
 output of code:
@@ -197,5 +206,5 @@ output of code:
 99: 58.941463470458984
 mean error in train set: 58.941463470458984
 mean error in test set: 58.48478317260742
-done
+done in seconds: 18.43150758743286
 """
