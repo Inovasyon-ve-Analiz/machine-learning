@@ -59,7 +59,7 @@ def get_data(path):
 
     return X_train, X_test, Y_train, Y_test
 
-tic = time.time()
+
 path = "weatherAUS.csv"
 run_on_gpu = True
 
@@ -69,7 +69,7 @@ X_train = torch.from_numpy(X_train).float()
 X_test = torch.from_numpy(X_test).float()
 Y_train = torch.from_numpy(Y_train).float()
 Y_test = torch.from_numpy(Y_test).float()
-
+tic = time.time()
 net = Net()
 if run_on_gpu:
     X_train = X_train.cuda()
