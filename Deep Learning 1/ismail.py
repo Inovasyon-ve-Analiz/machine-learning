@@ -2,9 +2,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split
 import time
 from get_data import get_data
 
@@ -28,7 +25,6 @@ class Net(nn.Module):
         return x
 
 
-
 path = "weatherAUS.csv"
 run_on_gpu = True
 
@@ -48,11 +44,11 @@ if run_on_gpu:
     net = net.cuda()
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(net.parameters(), lr=0.001)
+optimizer = optim.SGD(net.parameters(), lr=0.0001)
 
 loss_fn = torch.nn.MSELoss(reduction='mean')
 
-for epoch in range(100):
+for epoch in range(10000):
     
     output = net(X_train)
     output.size = Y_train.size
