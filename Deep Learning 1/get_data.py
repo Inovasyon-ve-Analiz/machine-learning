@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-import time
 
 def date_to_int(date):
     year = int(date[:4])
@@ -22,7 +21,6 @@ def date_to_int(date):
     elif year>2008 or (year == 2008 and month>2):
         n+=1
     return n
-
 
 def get_data(path="weatherAUS.csv",city="Albury",train_size = 0.75):
     df = pd.read_csv(path)
@@ -63,9 +61,3 @@ def get_data(path="weatherAUS.csv",city="Albury",train_size = 0.75):
     np_y = np.array(y)
     X_train, X_test, Y_train, Y_test = train_test_split(np_x,np_y,train_size=train_size)
     return X_train, X_test, Y_train, Y_test
-
-
-if __name__ == "__main__":
-    path = "weatherAUS.csv"
-    city = "Albury"
-    get_data(path,city)
