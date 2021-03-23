@@ -2,7 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+from torch.utils.data import Dataset
 import time
+import sys
 from get_data import get_data
 
 class Net(nn.Module):
@@ -24,45 +26,72 @@ class Net(nn.Module):
 
         return x
 
+def train(X_train, Y_train, model, loss_fn, optimizer):
+    size = len(Y_train)
+    train_loss = 0
+    for batch, (X, y) in enumerate(zip(X_train, Y_train)):
+        X = X.view(1,49)
+        y = y.view(1)
 
-path = "weatherAUS.csv"
-run_on_gpu = True
+        # Compute prediction error
+        pred = model(X)
+        loss = loss_fn(pred, y)
 
-X_train, X_test, Y_train, Y_test = get_data(path)
+        # Backpropagation
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
 
-X_train = torch.from_numpy(X_train).float()
-X_test = torch.from_numpy(X_test).float()
-Y_train = torch.from_numpy(Y_train).float()
-Y_test = torch.from_numpy(Y_test).float()
-tic = time.time()
-net = Net()
-if run_on_gpu:
-    X_train = X_train.cuda()
-    Y_train = Y_train.cuda()
-    X_test = X_test.cuda()
-    Y_test = Y_test.cuda()
-    net = net.cuda()
+        train_loss += loss_fn(pred, y).item()
 
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(net.parameters(), lr=0.0001)
+        if batch % 10 == 0:
+            loss, current = loss.item(), batch * len(X)
+            print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
+    train_loss /= size
+    print(f"Train error: \nAvg loss: {train_loss:>8f}\n")
 
-loss_fn = torch.nn.MSELoss(reduction='mean')
+def test(X_test, Y_test, model, loss_fn):
+    size = len(Y_test)
+    model.eval()
+    test_loss = 0
+    with torch.no_grad():
+        for X, y in zip(X_test, Y_test):
+            X = X.view(1,49)
+            y = y.view(1)
+            pred = model(X)
+            test_loss += loss_fn(pred, y).item()
+    test_loss /= size
+    print(f"Test Error: \nAvg loss: {test_loss:>8f} \n")
 
-for epoch in range(10000):
-    
-    output = net(X_train)
-    output.size = Y_train.size
-    loss = loss_fn(output, Y_train)
-    print(str(epoch)+": "+str(loss.item()))
-    optimizer.zero_grad()
-    loss.backward()
-    optimizer.step()
+if __name__ =="__main__":
 
-print("mean error in train set: " +str(loss.item()))
+    path = "weatherAUS.csv"
+    run_on_gpu = True
 
-pred = net(X_test)
-pred.size = Y_test.size
-loss = loss_fn(pred, Y_test)
-print("mean error in test set: " +str(loss.item()))
-toc = time.time()
-print("done in seconds: "+str(toc-tic))
+    X_train, X_test, Y_train, Y_test = get_data(path)
+
+    X_train = torch.from_numpy(X_train).float()
+    X_test = torch.from_numpy(X_test).float()
+    Y_train = torch.from_numpy(Y_train).float()
+    Y_test = torch.from_numpy(Y_test).float()
+    tic = time.time()
+    net = Net()
+    if run_on_gpu:
+        X_train = X_train.cuda()
+        Y_train = Y_train.cuda()
+        X_test = X_test.cuda()
+        Y_test = Y_test.cuda()
+        net = net.cuda()
+
+    optimizer = optim.Adam(net.parameters(), lr=0.0001)
+
+    loss_fn = nn.MSELoss(reduction='mean')
+
+    epochs = 10
+    for epoch in range(epochs):
+        print(f"Epoch {epoch+1}\n-----------------------------")
+        train(X_train, Y_train, net, loss_fn, optimizer)
+        test(X_test, Y_test, net, loss_fn)
+        
+
+    print(f"done in {time.time()-tic} seconds")
