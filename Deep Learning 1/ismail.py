@@ -41,7 +41,7 @@ def get_data(path):
         if not i == temp:
             temp = i
             locations.append(df[df["Location"]==i])
-            if len(locations) == 15:
+            if len(locations) == 10:
                 break
 
     X = []
